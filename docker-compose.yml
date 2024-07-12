@@ -1,0 +1,25 @@
+services:
+  ulab-admin-web-build:
+    container_name: ulab-admin-web-build
+    image: "ulab-admin-web-build"
+    volumes:
+      - ./:/app
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    command:
+      - sh
+      - -c
+      - pnpm install --frozen-lockfile && pnpm build
+
+  ulab-admin-web-prod:
+    container_name: ulab-admin-web-prod
+    restart: always
+    image: "nginx:stable-alpine"
+    volumes:
+      - ./dist:/usr/share/nginx/html
+    command: [ "nginx", "-g", "daemon off;" ]
+    #depends_on:
+    #   - ulab-admin-web-build
+    ports:
+      - 8891:80
