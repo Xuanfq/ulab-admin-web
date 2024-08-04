@@ -530,3 +530,12 @@ demoBook:
   publication_date: 出版日期
   price: 售价
   is_active: 是否启用
+
+nettraversalNetforward:
+  netForward: 网络转发
+  creator: 创建者
+  origin_ip: 源IP
+  origin_port: 源Port
+  origin_protocol: 源协议
+  forward_ip: 转发IP
+  forward_port: 转发Port

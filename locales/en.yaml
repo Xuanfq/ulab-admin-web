@@ -530,3 +530,12 @@ demoBook:
   publication_date: Publication date
   price: Price
   is_active: Active
+
+nettraversalNetforward:
+  netForward: Net Forward
+  creator: Creator
+  origin_ip: Origin IP
+  origin_port: Origin Port
+  origin_protocol: Origin Protocol
+  forward_ip: Forward IP
+  forward_port: Forward Port
