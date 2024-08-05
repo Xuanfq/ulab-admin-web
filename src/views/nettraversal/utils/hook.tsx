@@ -1,6 +1,6 @@
 import { netforwardApi } from "./api";
 import { hasAuth } from "@/router/utils";
-// import { renderOption, renderSwitch } from "@/views/system/render";
+import { renderOption, renderSwitch } from "@/views/system/render";
 import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
 import { reactive, ref, onMounted, type Ref, shallowRef } from "vue";
@@ -32,7 +32,7 @@ export function useNettraversalNetforward(tableRef: Ref) {
   });
 
   /**
-   * @description 格式化后端输出
+   * @description Format backend output
    * @param data
    */
   const formatOptions = (data: Array<any>) => {
@@ -49,13 +49,17 @@ export function useNettraversalNetforward(tableRef: Ref) {
     return result;
   };
 
-  // 新增或更新的form表单
+  // Newly added or updated form forms
   const editForm = shallowRef({
     title: t("nettraversalNetforward.netForward"),
     formProps: {
       rules: {}
     },
-    row: {},
+    row: {
+      is_active: row => {
+        return row?.is_active ?? true;
+      }
+    },
     columns: () => {
       return [
         {
@@ -73,12 +77,18 @@ export function useNettraversalNetforward(tableRef: Ref) {
           valueType: "select",
           options: formatOptions(choicesDict.value["origin_protocol"] ?? []),
           colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
+        },
+        {
+          prop: "is_active",
+          valueType: "radio",
+          renderField: renderOption()
         }
       ];
     }
   });
 
-  //用于前端table字段展示，前两个，selection是固定的，用与控制多选
+  // Used for displaying table fields in the frontend. 
+  // The first two, selection, are fixed and used to control multiple selections
   const columns = ref<TableColumnList>([
     {
       type: "selection",
@@ -118,6 +128,19 @@ export function useNettraversalNetforward(tableRef: Ref) {
           {row.origin_protocol.label}
         </span>
       )
+    },
+    {
+      prop: "is_active",
+      minWidth: 130,
+      cellRenderer: renderSwitch(auth.update, tableRef, "is_active", scope => {
+        return (
+          scope.row.origin_ip +
+          ":" +
+          scope.row.origin_port +
+          ":" +
+          scope.row.origin_protocol.label
+        );
+      })
     },
     {
       prop: "forward_ip",
