@@ -53,6 +53,7 @@ export function useNettraversalNetforward(tableRef: Ref) {
   const editForm = shallowRef({
     title: t("nettraversalNetforward.netForward"),
     formProps: {
+      labelWidth: "130px",
       rules: {}
     },
     row: {
@@ -63,26 +64,30 @@ export function useNettraversalNetforward(tableRef: Ref) {
     columns: () => {
       return [
         {
-          prop: "origin_ip",
+          prop: "dst_ip",
           valueType: "input",
           colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
         },
         {
-          prop: "origin_port",
+          prop: "dst_port",
           valueType: "input-number",
           colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
         },
         {
-          prop: "origin_protocol",
+          prop: "protocol",
           valueType: "select",
-          options: formatOptions(choicesDict.value["origin_protocol"] ?? []),
+          options: formatOptions(choicesDict.value["protocol"] ?? []),
           colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
         },
         {
           prop: "is_active",
           valueType: "radio",
           renderField: renderOption()
-        }
+        },
+        {
+          prop: "description",
+          valueType: "textarea",
+        },
       ];
     }
   });
@@ -107,25 +112,25 @@ export function useNettraversalNetforward(tableRef: Ref) {
       )
     },
     {
-      prop: "origin_ip",
+      prop: "dst_ip",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.origin_ip}>{row.origin_ip}</span>
+        <span v-copy={row.dst_ip}>{row.dst_ip}</span>
       )
     },
     {
-      prop: "origin_port",
+      prop: "dst_port",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.origin_port}>{row.origin_port}</span>
+        <span v-copy={row.dst_port}>{row.dst_port}</span>
       )
     },
     {
-      prop: "origin_protocol",
+      prop: "protocol",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.origin_protocol.label}>
-          {row.origin_protocol.label}
+        <span v-copy={row.protocol.label}>
+          {row.protocol.label}
         </span>
       )
     },
@@ -134,26 +139,33 @@ export function useNettraversalNetforward(tableRef: Ref) {
       minWidth: 130,
       cellRenderer: renderSwitch(auth.update, tableRef, "is_active", scope => {
         return (
-          scope.row.origin_ip +
+          scope.row.dst_ip +
           ":" +
-          scope.row.origin_port +
+          scope.row.dst_port +
           ":" +
-          scope.row.origin_protocol.label
+          scope.row.rotocol.label
         );
       })
     },
     {
-      prop: "forward_ip",
+      prop: "src_ip",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.forward_ip}>{row.forward_ip}</span>
+        <span v-copy={row.src_ip}>{row.src_ip}</span>
       )
     },
     {
-      prop: "forward_port",
+      prop: "src_port",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.forward_port}>{row.forward_port}</span>
+        <span v-copy={row.src_port}>{row.src_port}</span>
+      )
+    },
+    {
+      prop: "description",
+      minWidth: 150,
+      cellRenderer: ({ row }) => (
+        <span v-copy={row.description}>{row.description}</span>
       )
     },
     {

@@ -231,6 +231,7 @@ menus:
   messageCenter: 消息中心
   chat: 聊天室
   apiDocs: 接口文档
+  netForward: 网络转发
 
 userinfo:
   userinfo: 个人信息
@@ -534,8 +535,8 @@ demoBook:
 nettraversalNetforward:
   netForward: 网络转发
   creator: 创建者
-  origin_ip: 源IP
-  origin_port: 源Port
-  origin_protocol: 源协议
-  forward_ip: 转发IP
-  forward_port: 转发Port
+  src_ip: 源地址
+  src_port: 源端口
+  protocol: 协议
+  dst_ip: 目标地址
+  dst_port: 目标端口

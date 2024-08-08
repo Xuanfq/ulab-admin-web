@@ -231,6 +231,7 @@ menus:
   messageCenter: Notice
   chat: Chat
   apiDocs: Api Docs
+  netForward: Net Forward
 
 userinfo:
   userinfo: UserInfo
@@ -534,8 +535,8 @@ demoBook:
 nettraversalNetforward:
   netForward: Net Forward
   creator: Creator
-  origin_ip: Origin IP
-  origin_port: Origin Port
-  origin_protocol: Origin Protocol
-  forward_ip: Forward IP
-  forward_port: Forward Port
+  src_ip: Source IP
+  src_port: Source Port
+  protocol: Protocol
+  dst_ip: Destination IP
+  dst_port: Destination Port
