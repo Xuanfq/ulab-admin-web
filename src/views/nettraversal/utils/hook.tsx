@@ -143,7 +143,7 @@ export function useNettraversalNetforward(tableRef: Ref) {
           ":" +
           scope.row.dst_port +
           ":" +
-          scope.row.rotocol.label
+          scope.row.protocol.label
         );
       })
     },
