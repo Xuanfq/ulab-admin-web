@@ -232,6 +232,9 @@ menus:
   chat: Chat
   apiDocs: Api Docs
   netForward: Net Forward
+  NetForward: Net Forward
+  PortForward: Port Forward
+  portForward: Port Forward
 
 userinfo:
   userinfo: UserInfo
@@ -532,11 +535,18 @@ demoBook:
   price: Price
   is_active: Active
 
-nettraversalNetforward:
+net:
   netForward: Net Forward
+  NetForward: Net Forward
+  portForward: Port Forward
+  PortForward: Port Forward
   creator: Creator
   src_ip: Source IP
   src_port: Source Port
   protocol: Protocol
   dst_ip: Destination IP
   dst_port: Destination Port
+
+power:
+  apcpdupower: APC PDU Power
+  power: Power

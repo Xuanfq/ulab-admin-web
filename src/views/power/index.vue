@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { useNettraversalNetforward } from "./utils/hook";
+import { useApcPduPower } from "./utils/hook";
 import ReBaseTable from "@/components/ReBaseTable";
 
 defineOptions({
-  name: "NettraversalNetforward"
+  name: "PowerApcPduPower"
 });
 
 const tableRef = ref();
 
-const { api, auth, columns, editForm } = useNettraversalNetforward(tableRef);
+const { api, auth, columns, editForm } = useApcPduPower(tableRef);
 
 </script>
 
@@ -20,6 +20,6 @@ const { api, auth, columns, editForm } = useNettraversalNetforward(tableRef);
     :auth="auth"
     :edit-form="editForm"
     :table-columns="columns"
-    locale-name="nettraversalNetforward"
+    locale-name="power"
   />
 </template>

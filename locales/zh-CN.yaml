@@ -232,6 +232,9 @@ menus:
   chat: 聊天室
   apiDocs: 接口文档
   netForward: 网络转发
+  NetForward: 网络转发
+  PortForward: 端口转发
+  portForward: 端口转发
 
 userinfo:
   userinfo: 个人信息
@@ -532,11 +535,18 @@ demoBook:
   price: 售价
   is_active: 是否启用
 
-nettraversalNetforward:
+net:
   netForward: 网络转发
+  NetForward: 网络转发
+  portForward: 端口转发
+  PortForward: 端口转发
   creator: 创建者
   src_ip: 源地址
   src_port: 源端口
   protocol: 协议
   dst_ip: 目标地址
   dst_port: 目标端口
+
+power:
+  apcpdupower: APC PDU 电源控制器
+  power: 电源

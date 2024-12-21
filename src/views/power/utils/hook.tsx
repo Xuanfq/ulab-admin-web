@@ -1,24 +1,24 @@
-import { netforwardApi } from "./api";
+import { apcPduPowerApi } from "./api";
 import { hasAuth } from "@/router/utils";
 import { renderOption, renderSwitch } from "@/views/system/render";
 import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
 import { reactive, ref, onMounted, type Ref, shallowRef } from "vue";
 
-export function useNettraversalNetforward(tableRef: Ref) {
+export function useApcPduPower(tableRef: Ref) {
   const { t } = useI18n();
   // Permission judgment, used to determine whether the permission exists
-  const api = reactive(netforwardApi);
+  const api = reactive(apcPduPowerApi);
 
   const auth = reactive({
-    choices: hasAuth("choices:nettraversalNetForward"),
-    list: hasAuth("list:nettraversalNetForward"),
-    create: hasAuth("create:nettraversalNetForward"),
-    delete: hasAuth("delete:nettraversalNetForward"),
-    update: hasAuth("update:nettraversalNetForward"),
-    export: hasAuth("export:nettraversalNetForward"),
-    import: hasAuth("import:nettraversalNetForward"),
-    batchDelete: hasAuth("batchDelete:nettraversalNetForward")
+    choices: hasAuth("choices:powerApcPduPower"),
+    list: hasAuth("list:powerApcPduPower"),
+    create: hasAuth("create:powerApcPduPower"),
+    delete: hasAuth("delete:powerApcPduPower"),
+    update: hasAuth("update:powerApcPduPower"),
+    export: hasAuth("export:powerApcPduPower"),
+    import: hasAuth("import:powerApcPduPower"),
+    batchDelete: hasAuth("batchDelete:powerApcPduPower")
   });
 
   const choicesDict = ref([]);
@@ -51,7 +51,7 @@ export function useNettraversalNetforward(tableRef: Ref) {
 
   // Newly added or updated form forms
   const editForm = shallowRef({
-    title: t("nettraversalNetforward.netForward"),
+    title: t("power.apcpdupower"),
     formProps: {
       labelWidth: "130px",
       rules: {}
@@ -64,25 +64,35 @@ export function useNettraversalNetforward(tableRef: Ref) {
     columns: () => {
       return [
         {
-          prop: "dst_ip",
+          prop: "name",
           valueType: "input",
           colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
         },
         {
-          prop: "dst_port",
+          prop: "type",
+          valueType: "select",
+          options: formatOptions(choicesDict.value["type"] ?? []),
+          colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
+        },
+        {
+          prop: "ip",
+          valueType: "input",
+          colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
+        },
+        {
+          prop: "port",
           valueType: "input-number",
           colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
         },
         {
-          prop: "protocol",
-          valueType: "select",
-          options: formatOptions(choicesDict.value["protocol"] ?? []),
+          prop: "username",
+          valueType: "input",
           colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
         },
         {
-          prop: "is_active",
-          valueType: "radio",
-          renderField: renderOption()
+          prop: "password",
+          valueType: "input",
+          colProps: { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 }
         },
         {
           prop: "description",
@@ -101,64 +111,37 @@ export function useNettraversalNetforward(tableRef: Ref) {
       reserveSelection: true
     },
     {
-      prop: "pk",
+      prop: "id",
       minWidth: 100
     },
     {
-      prop: "creator",
+      prop: "name",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.creator.username}>{row.creator.username}</span>
+        <span v-copy={row.name}>{row.name}</span>
       )
     },
     {
-      prop: "dst_ip",
+      prop: "type",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.dst_ip}>{row.dst_ip}</span>
-      )
-    },
-    {
-      prop: "dst_port",
-      minWidth: 150,
-      cellRenderer: ({ row }) => (
-        <span v-copy={row.dst_port}>{row.dst_port}</span>
-      )
-    },
-    {
-      prop: "protocol",
-      minWidth: 150,
-      cellRenderer: ({ row }) => (
-        <span v-copy={row.protocol.label}>
-          {row.protocol.label}
+        <span v-copy={row.type.label}>
+          {row.type.label}
         </span>
       )
     },
     {
-      prop: "is_active",
-      minWidth: 130,
-      cellRenderer: renderSwitch(auth.update, tableRef, "is_active", scope => {
-        return (
-          scope.row.dst_ip +
-          ":" +
-          scope.row.dst_port +
-          ":" +
-          scope.row.protocol.label
-        );
-      })
-    },
-    {
-      prop: "src_ip",
+      prop: "ip",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.src_ip}>{row.src_ip}</span>
+        <span v-copy={row.ip}>{row.ip}</span>
       )
     },
     {
-      prop: "src_port",
+      prop: "port",
       minWidth: 150,
       cellRenderer: ({ row }) => (
-        <span v-copy={row.src_port}>{row.src_port}</span>
+        <span v-copy={row.port}>{row.port}</span>
       )
     },
     {
@@ -166,6 +149,13 @@ export function useNettraversalNetforward(tableRef: Ref) {
       minWidth: 150,
       cellRenderer: ({ row }) => (
         <span v-copy={row.description}>{row.description}</span>
+      )
+    },
+    {
+      prop: "creator",
+      minWidth: 150,
+      cellRenderer: ({ row }) => (
+        <span v-copy={row.creator.username}>{row.creator.username}</span>
       )
     },
     {
